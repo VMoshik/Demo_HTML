@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from your repository
+                git 'https://github.com/VMoshik/Demo_HTML/new/main'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    // Define the path to the HTML file and Nginx directory
+                    def htmlFile = 'index.html'
+                    def nginxDir = '/var/www/html'
+                    
+                    // Copy the HTML file to the Nginx directory
+                    sh "sudo cp ${htmlFile} ${nginxDir}/index.html"
+                    
+                    // Set proper permissions (optional)
+                    sh "sudo chown www-data:www-data ${nginxDir}/index.html"
+                }
+            }
+        }
+    }
+}
