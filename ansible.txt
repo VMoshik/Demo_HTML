@@ -1,0 +1,43 @@
+---
+
+- name: Install and Configure Nginx
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Update apt package index
+      apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Create the HTML directory if it doesn't exist
+      file:
+        path: /var/www/html
+        state: directory
+        mode: '0755'
+
+    - name: Deploy custom HTML file
+      copy:
+        dest: /var/www/html/index.html
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Welcome to My Website</title>
+          </head>
+          <body>
+              <h1>Hello, World!</h1>
+              <p>This is a simple HTML page served by Nginx.</p>
+          </body>
+          </html>
+        mode: '0644'
+
+    - name: Ensure Nginx is started
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
