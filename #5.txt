@@ -1,0 +1,70 @@
+Started by user Moshik
+Obtained JenkinsFile from git https://github.com/VMoshik/Demo_HTML.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/jenkin3
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/jenkin3/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/VMoshik/Demo_HTML.git # timeout=10
+Fetching upstream changes from https://github.com/VMoshik/Demo_HTML.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/VMoshik/Demo_HTML.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision b97a920e704d763042487d6143acc5f82d91a9d5 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f b97a920e704d763042487d6143acc5f82d91a9d5 # timeout=10
+Commit message: "Update and rename HTML.html to index.html"
+ > git rev-list --no-walk 7445a055aa16ba264f080d1266ed291090f5ae05 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/jenkin3/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/VMoshik/Demo_HTML.git # timeout=10
+Fetching upstream changes from https://github.com/VMoshik/Demo_HTML.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/VMoshik/Demo_HTML.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision b97a920e704d763042487d6143acc5f82d91a9d5 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f b97a920e704d763042487d6143acc5f82d91a9d5 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main b97a920e704d763042487d6143acc5f82d91a9d5 # timeout=10
+Commit message: "Update and rename HTML.html to index.html"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ sudo cp index.html /var/www/html/index.html
+[Pipeline] sh
++ sudo chown www-data:www-data /var/www/html/index.html
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
